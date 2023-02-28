@@ -1,3 +1,21 @@
+// variables
+
+var words = document.getElementsByClassName('word')
+var letters = []
+
+// get letters
+
+for (const word of words) {
+    for (const child of word.children) {
+        letters.push(child.innerText.charCodeAt(0))
+    }
+
+    letters.push(' '.charCodeAt(0))
+    console.log(' '.charCodeAt(0))
+}
+
+// functions
+
 function simulate_key(keyCode, type, modifiers) {
 	var event_name = (typeof(type) === 'string') ? 'key' + type : 'keydown';	
 	var modifier = (typeof(modifiers) === 'object') ? modifier : {};
@@ -27,8 +45,11 @@ document.addEventListener('keypress', on_key_event, false);
 document.addEventListener('keydown', on_key_event, false);
 document.addEventListener('keyup', on_key_event, false);
 
-setTimeout(() => {
-    simulate_key(38);
-    simulate_key(38, 'up');
-    simulate_key(45, 'press');
-}, 5000);
+//
+
+for (var letter of letters) {
+    setTimeout(() => {
+        simulate_key(letter);
+        simulate_key(letter, 'up');
+    }, 5000);
+}
